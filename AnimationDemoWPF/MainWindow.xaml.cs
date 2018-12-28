@@ -26,7 +26,7 @@ namespace AnimationDemoWPF
         {
             InitializeComponent();
 
-            animationView1.AnimationController  = new Animation.ThreadingFrameController() { Loop = true };
+            animationView1.AnimationController  = new Animation.ThreadingFrameController();
             animationView2.AnimationController = new Animation.TimingFrameController();
         }
 
