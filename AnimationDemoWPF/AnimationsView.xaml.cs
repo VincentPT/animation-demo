@@ -38,6 +38,11 @@ namespace AnimationDemoWPF
             InitializeComponent();
         }
 
+        #region Drag & drop
+        bool allowDrop = true;
+        Animation.KeyFramesAnimation gifSource;
+        Image dragImage = null;
+
         private void Canvas_Drop(object sender, DragEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("Canvas_Drop " + this.Name);
@@ -67,10 +72,6 @@ namespace AnimationDemoWPF
             dragImage = null;
             System.Diagnostics.Debug.WriteLine("Canvas_DragLeave " + this.Name);
         }
-
-        bool allowDrop = true;
-        Animation.KeyFramesAnimation gifSource;
-        Image dragImage = null;
 
         private void Canvas_DragOver(object sender, DragEventArgs e)
         {
@@ -135,6 +136,9 @@ namespace AnimationDemoWPF
             }
             return null;
         }
+        #endregion
+
+        #region Animation operations
 
         public void Play()
         {
@@ -166,6 +170,44 @@ namespace AnimationDemoWPF
             {
                 animationController.Stop();
             }
+        }
+
+        #endregion
+
+        #region Moving item
+
+        Image movingImage = null;
+        Point downPoint;
+        Point imageDownLocation;
+        private void OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            downPoint = e.GetPosition(myCanvas);
+            var hitTestResult = VisualTreeHelper.HitTest(myCanvas, downPoint);
+            if(hitTestResult.VisualHit != null)
+            {
+                movingImage = hitTestResult.VisualHit as Image;
+                imageDownLocation = new Point(Canvas.GetLeft(movingImage), Canvas.GetTop(movingImage));
+            }
+            e.Handled = true;
+        }
+
+        private void OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (movingImage != null)
+            {
+                var currentPoint = e.GetPosition(myCanvas);
+                var u = currentPoint - downPoint;
+                Canvas.SetLeft(movingImage, imageDownLocation.X + u.X);
+                Canvas.SetTop(movingImage, imageDownLocation.Y + u.Y);
+            }
+            e.Handled = true;
+        }
+
+        #endregion
+
+        private void myCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            movingImage = null;
         }
     }
 }

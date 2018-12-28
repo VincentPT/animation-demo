@@ -6,7 +6,9 @@
              xmlns:local="clr-namespace:AnimationDemoWPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Canvas x:Name="myCanvas" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" AllowDrop="True" DragEnter="Canvas_DragEnter" DragLeave="Canvas_DragLeave" DragOver="Canvas_DragOver" Drop="Canvas_Drop">
+    <Canvas x:Name="myCanvas" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" AllowDrop="True"
+            DragEnter="Canvas_DragEnter" DragLeave="Canvas_DragLeave" DragOver="Canvas_DragOver" Drop="Canvas_Drop"
+            MouseMove="OnMouseMove" MouseLeftButtonDown="OnMouseDown" MouseLeftButtonUp="myCanvas_MouseLeftButtonUp">
         <Canvas.Background>
             <SolidColorBrush Color="LightGray"></SolidColorBrush>
         </Canvas.Background>
