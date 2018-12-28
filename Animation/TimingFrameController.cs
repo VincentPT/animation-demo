@@ -53,25 +53,28 @@ namespace Animation
         /// <param name="dutation"></param>
         /// <returns></returns>
         private static int UpperBound(KeyFrame[] frames, int first, int last, double dutation)
-        {                      
-            while (first < last)
+        {
+            var count = last - first;
+            while (count > 0)
             {
-                var it = (first + last) >> 1;
+                var step = (count >> 1);
+                var it = first + step;
                 var time = frames[it].Delay;
-                if(dutation >= time)
+                if (dutation >= time)
                 {
                     first = it + 1;
+                    count -= step + 1;
                 }
                 else
                 {
-                    last = it - 1;
+                    count = step;
                 }
             }
 
             return first;
         }
 
-        private static int FindKeyFrame(KeyFrame[] frames, double duration)
+        public static int FindKeyFrame(KeyFrame[] frames, double duration)
         {
             return UpperBound(frames, 0, frames.Length, duration) - 1;
         }
