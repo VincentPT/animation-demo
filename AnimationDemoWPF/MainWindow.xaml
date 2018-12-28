@@ -16,7 +16,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="DarkBlue">
+            <Border Grid.Column="0" Grid.Row="0" BorderThickness="1" BorderBrush="DarkBlue">
                 <local:AnimationsView x:Name="animationView1" AllowDrop="True"></local:AnimationsView>
             </Border>
             <Border Grid.Column="1" Grid.Row="0" BorderThickness="1" BorderBrush="DarkBlue">

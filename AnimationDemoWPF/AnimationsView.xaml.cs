@@ -186,7 +186,10 @@ namespace AnimationDemoWPF
             if(hitTestResult.VisualHit != null)
             {
                 movingImage = hitTestResult.VisualHit as Image;
-                imageDownLocation = new Point(Canvas.GetLeft(movingImage), Canvas.GetTop(movingImage));
+                if (movingImage != null)
+                {
+                    imageDownLocation = new Point(Canvas.GetLeft(movingImage), Canvas.GetTop(movingImage));
+                }
             }
             e.Handled = true;
         }
