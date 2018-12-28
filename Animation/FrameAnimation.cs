@@ -53,6 +53,7 @@ namespace Animation
         {
             AnimationSource = source;
             Loop = false;
+            if(KeyFrames.Length > 0) CurrentFrameIndex = 0;
         }
 
         private void UpdateFrame()
