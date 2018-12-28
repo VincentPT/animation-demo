@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2048
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimationDemoWPF", "AnimationDemoWPF\AnimationDemoWPF.csproj", "{CA85899C-0FB4-4532-9E94-56ECCBAEA857}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Animation", "Animation\Animation.csproj", "{967910E6-9E19-4323-BE1F-9D142A40CC9A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA85899C-0FB4-4532-9E94-56ECCBAEA857}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA85899C-0FB4-4532-9E94-56ECCBAEA857}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA85899C-0FB4-4532-9E94-56ECCBAEA857}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA85899C-0FB4-4532-9E94-56ECCBAEA857}.Release|Any CPU.Build.0 = Release|Any CPU
+		{967910E6-9E19-4323-BE1F-9D142A40CC9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{967910E6-9E19-4323-BE1F-9D142A40CC9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{967910E6-9E19-4323-BE1F-9D142A40CC9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{967910E6-9E19-4323-BE1F-9D142A40CC9A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D225B336-885D-4F51-813B-43299E3B76E7}
+	EndGlobalSection
+EndGlobal
