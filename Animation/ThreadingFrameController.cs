@@ -41,8 +41,6 @@ namespace Animation
             }
         }
 
-        public bool Loop { get; set; }
-
         public Dispatcher UserDispatcher { get; set; }
 
         LinkedList<Frame> frames = new LinkedList<Frame>();
@@ -80,30 +78,25 @@ namespace Animation
         private void RunAnimations()
         {
             WaitHandle[] waitHandles = { hasControlEvent, addAnimationEvent };
-            if (frames.Count == 0)
+            while (currentEvent != ControlEvent.Stop && frames.Count == 0)
             {
-                if (Loop == false)
-                {
-                    currentEvent = ControlEvent.Stop;
-                    return;
-                }
                 WaitHandle.WaitAny(waitHandles);
-            }
-
-            while (currentEvent == ControlEvent.Pause)
-            {
-                hasControlEvent.WaitOne();
             }
 
             if (currentEvent == ControlEvent.Stop) return;
 
             double delay = 0;
             TimeSpan invokeTimeout = TimeSpan.FromMilliseconds(50);
-            var frameDelay = TimeSpan.FromMilliseconds(delay);
+            var frameDelay = TimeSpan.FromMilliseconds(delay);           
 
             startTime = DateTime.Now;
             while (currentEvent != ControlEvent.Stop)
             {
+                while (currentEvent == ControlEvent.Pause)
+                {
+                    hasControlEvent.WaitOne();
+                }
+
                 var t1 = DateTime.Now;
 
                 lock (syncObject) {
@@ -120,16 +113,21 @@ namespace Animation
                         // check if a frame is played
                         if (frame.Played)
                         {
-                            // then move to next frame
-                            animation.NextFrame();
-                            // and set next frame is not be played
+                            if (animation.CurrentFrameIndex == animation.FrameCount - 1)
+                            {
+                                frame.Delay = animation.CurrentFrame.Delay;
+                                animation.NextFrame();
+                            }
+                            else
+                            {
+                                animation.NextFrame();
+                                frame.Delay = animation.CurrentFrame.Delay;
+                            }
                             frame.Played = false;
-                            // the next frame will be delay during current frame presents
-                            frame.Delay = animation.CurrentFrame.Delay;
                         }
-                        
+
                         // remove animation that was out of its life time
-                        if(animation.FrameCount <= animation.CurrentFrameIndex && animation.Loop == false)
+                        if (animation.FrameCount <= animation.CurrentFrameIndex && animation.Loop == false)
                         {
                             var tempNode = node;
                             node = node.Next;
@@ -167,8 +165,6 @@ namespace Animation
                     {                        
                         frame.Delay -= delay;
                     }
-
-                    if (frames.Count == 0 && Loop == false) break;
                 }
 
                 var t2 = DateTime.Now;
@@ -194,15 +190,6 @@ namespace Animation
                             }
                         }
                     }
-                }
-
-                while (currentEvent == ControlEvent.Pause)
-                {
-                    hasControlEvent.WaitOne();
-                }
-                if (currentEvent == ControlEvent.Play)
-                {
-                    // nothing to do, just continue play
                 }
             }
 
