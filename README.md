@@ -1,2 +1,3 @@
 # animation-demo
-animation demo using WPF
+Demo animation using ThreadingFrameController and TimminngFrameControler.
+All controllers work independently from animation container.
